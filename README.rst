@@ -10,3 +10,10 @@ Dependencies
 .. code-block:: bash
 
     $ paru -S paru -S aur/pyinstaller --needed --noconfirm 
+
+Convertion
+==========
+
+.. code-block::bash
+
+      $ pyinstaller --onefile run_file.py
