@@ -1,4 +1,4 @@
-Run Code Termux
+Code Rush
 ===============
 It will make code runner inside your terminal.
 
@@ -23,4 +23,4 @@ Installation
 
 .. code-block:: bash
 
-    $ sudo cp runcode /usr/local/bin -r
+    $ sudo cp coderush /usr/local/bin -r
