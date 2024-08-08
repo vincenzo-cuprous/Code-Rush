@@ -14,6 +14,6 @@ Dependencies
 Convertion
 ==========
 
-.. code-block::bash
+.. code-block:: bash
 
       $ pyinstaller --onefile run_file.py
