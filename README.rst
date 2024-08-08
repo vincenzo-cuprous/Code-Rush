@@ -17,3 +17,10 @@ Convertion
 .. code-block:: bash
 
       $ pyinstaller --onefile run_file.py
+
+Installation
+============
+
+.. code-block:: bash
+
+    $ sudo cp runcode /usr/local/bin -r
