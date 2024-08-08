@@ -7,6 +7,6 @@ Dependencies
 
 - For Arch
 
-..code-block:: bash
+.. code-block:: bash
 
     $ paru -S paru -S aur/pyinstaller --needed --noconfirm 
