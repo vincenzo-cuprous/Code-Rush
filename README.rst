@@ -5,7 +5,7 @@ It will make code runner, like vscode, inside your terminal.
 Dependencies
 =============
 
-- Names
+- Name
 
 .. code-block:: bash
 
