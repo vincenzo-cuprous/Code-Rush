@@ -9,7 +9,9 @@ Dependencies
 
 .. code-block:: bash
 
-    $ paru -S aur/pyinstaller --needed --noconfirm 
+    $ pyinstaller (python module)
+    $ python3
+    $ rustup or rustc 
 
 Build
 =====
