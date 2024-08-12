@@ -1,11 +1,11 @@
 Code Rush
-===============
+=========
 It will make code runner, like vscode, inside your terminal.
 
 Dependencies
 =============
 
-- Name
+- Names
 
 .. code-block:: bash
 
