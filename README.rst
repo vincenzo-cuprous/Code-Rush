@@ -17,7 +17,7 @@ Build
 
 .. code-block:: bash
 
-      $ pyinstaller --onefile coderush.py.py
+      $ pyinstaller --onefile coderush.py
 
 - In Rust
 
