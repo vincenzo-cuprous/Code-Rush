@@ -1,6 +1,6 @@
 Code Rush
 ===============
-It will make code runner inside your terminal.
+It will make code runner, like vscode, inside your terminal.
 
 Dependencies
 =============
@@ -9,14 +9,22 @@ Dependencies
 
 .. code-block:: bash
 
-    $ paru -S paru -S aur/pyinstaller --needed --noconfirm 
+    $ paru -S aur/pyinstaller --needed --noconfirm 
 
-Convertion
-==========
+Build
+=====
+- In Python
 
 .. code-block:: bash
 
       $ pyinstaller --onefile run_file.py
+
+- In Rust
+
+.. code-block:: bash
+
+     $ cargo build && cargo run
+
 
 Installation
 ============
