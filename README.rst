@@ -13,6 +13,7 @@ Dependencies
     $ pyinstaller (python module)
     $ python3
     $ rustup or rustc
+    $ fish
 
 - For Arch
 
