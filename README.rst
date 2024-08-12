@@ -5,13 +5,22 @@ It will make code runner, like vscode, inside your terminal.
 Dependencies
 =============
 
+- Names
+
+.. code-block:: bash
+
+
+    $ pyinstaller (python module)
+    $ python3
+    $ rustup or rustc
+
 - For Arch
 
 .. code-block:: bash
 
-    $ pyinstaller (python module)
-    $ python3
-    $ rustup or rustc 
+   $ sudo bash dependencies_for_python.bash
+   $ sudo bash dependencies_for_rust.bash
+
 
 Build
 =====
@@ -25,7 +34,9 @@ Build
 
 .. code-block:: bash
 
-     $ cargo build && cargo run
+     $ cd coderush-rust &&
+     $ cargo build && 
+     $ cargo run
 
 
 Installation
