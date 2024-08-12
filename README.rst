@@ -43,6 +43,16 @@ Build
 Installation
 ============
 
+- For Python 
+
 .. code-block:: bash
 
     $ sudo cp coderush /usr/local/bin -r
+
+- For Rust
+    
+.. code-block:: bash
+
+   $ cd target &&
+   $ cd debug &&
+   $ sudo cp coderush /usr/local/bin -r
