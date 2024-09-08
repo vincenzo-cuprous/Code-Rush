@@ -38,7 +38,7 @@ Build
 
 .. code-block:: bash
 
-     cargo build && 
+     cargo build
      cargo run
 
 Installation
