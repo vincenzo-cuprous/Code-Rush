@@ -1,6 +1,6 @@
 Code Rush
 =========
-     It will make code runner, like vscode, inside your terminal. And can be usefull on sublime text editor.
+           It will make code runner, like vscode, inside your terminal. And can be usefull on sublime text editor.
 
 Dependencies
 =============
@@ -14,7 +14,7 @@ Dependencies
 .. code-block:: bash
 
      sudo pacman -Sy &&
-     sudo pacman -S rustup &&
+     sudo pacman -S rustup --needed --noconfirm &&
      rustup defualt stable
 
 - For Debian Or Ubuntu
