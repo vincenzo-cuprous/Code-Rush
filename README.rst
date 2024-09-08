@@ -15,7 +15,7 @@ Dependencies
 
      sudo pacman -Sy &&
      sudo pacman -S rustup --needed --noconfirm &&
-     rustup defualt stable
+     rustup default stable
 
 - For Debian Or Ubuntu
 
