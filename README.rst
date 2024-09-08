@@ -7,7 +7,7 @@ Dependencies
 
 - Names
 
-     rustup or rustc
+     1.rustup or rustc
 
 - For Arch
 
@@ -41,14 +41,3 @@ Build
      cd coderush-rust &&
      cargo build && 
      cargo run
-
-
-Installation
-============
-
-.. code-block:: bash
-
-    cd coderush-rust &&
-    cd target &&
-    cd release &&
-    sudo cp coderush /usr/local/bin -r
