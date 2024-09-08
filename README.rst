@@ -13,8 +13,8 @@ Dependencies
 
 .. code-block:: bash
 
-     sudo pacman -Sy &&
-     sudo pacman -S rustup --needed --noconfirm &&
+     sudo pacman -Sy
+     sudo pacman -S rustup --needed --noconfirm
      rustup default stable
 
 - For Debian Or Ubuntu
