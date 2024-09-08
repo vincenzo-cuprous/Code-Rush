@@ -6,3 +6,5 @@ edition = "2021"
 [dependencies]
 shellexpand = "2.1"
 dirs = "4.0"
+winapi = { version = "0.3", features = ["winreg", "winuser"] }
+zip = "0.6"
