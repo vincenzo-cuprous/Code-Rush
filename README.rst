@@ -34,9 +34,9 @@ Build
 
 .. code-block:: bash
 
-     $ cd coderush-rust &&
-     $ cargo build && 
-     $ cargo run
+     cd coderush-rust &&
+     cargo build && 
+     cargo run
 
 
 Installation
