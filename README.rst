@@ -44,7 +44,11 @@ Dependencies
 
 - For Windows
 
-     
+.. code-block:: powershell
+
+    rustup toolchain install stable-x86_64-pc-windows-gnu
+    rustup default stable-x86_64-pc-windows-gnu
+    rustup override set stable-x86_64-pc-windows-gnu
 
 Build
 =====
