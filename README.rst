@@ -50,4 +50,8 @@ Installation
 .. code-block:: bash
 
         sudo cp coderush /usr/local/bin/ -r
+
+- For Windows
+
+        Just use it and make fun.
       
