@@ -54,12 +54,7 @@ Build
 .. code-block:: bash
 
      cargo build --release
-
-- To Compile For Window
-
-.. code-block:: bash
-
-       cargo build --release --target x86_64-pc-windows-gnu
+     cargo build --release --target x86_64-pc-windows-gnu # For Windows
 
 - On Windows
 
