@@ -7,7 +7,9 @@ Dependencies
 
 - Names
 
-     1.rustup or rustc
+     1. rustup or rustc
+     2. mingw64-gcc
+     3. x86_64-pc-windows-gnu
 
 - On Arch
 
@@ -16,18 +18,29 @@ Dependencies
      sudo pacman -Sy
      sudo pacman -S rustup --needed --noconfirm
      rustup default stable
+     rustup target add x86_64-pc-windows-gnu
+     sudo pacman -S mingw-w64-gcc
+
 
 - On Debian Or Ubuntu
 
 .. code-block:: bash
 
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    rustup target add x86_64-pc-windows-gnu
+    sudo apt-get install gcc-mingw-w64
+
+
 
 - On Fedora
 
 .. code-block:: bash
 
    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   rustup target add x86_64-pc-windows-gnu
+   sudo dnf install mingw64-gcc
+
+
 
 - For Windows
 
