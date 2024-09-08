@@ -38,7 +38,6 @@ Build
 
 .. code-block:: bash
 
-     cd coderush-rust &&
      cargo build && 
      cargo run
 
