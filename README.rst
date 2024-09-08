@@ -77,5 +77,6 @@ Installation
 
 - For Windows
 
-        Just use it and make fun.
+       1. First hit setup.exe
+       2. Then open path.exe inside unzipped folder
       
