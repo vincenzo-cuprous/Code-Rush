@@ -9,7 +9,7 @@ Dependencies
 
      1.rustup or rustc
 
-- For Arch
+- On Arch
 
 .. code-block:: bash
 
@@ -17,13 +17,13 @@ Dependencies
      sudo pacman -S rustup --needed --noconfirm
      rustup default stable
 
-- For Debian Or Ubuntu
+- On Debian Or Ubuntu
 
 .. code-block:: bash
 
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-- For Fedora
+- On Fedora
 
 .. code-block:: bash
 
@@ -36,10 +36,23 @@ Dependencies
 Build
 =====
 
+- On Linux
+
 .. code-block:: bash
 
-     cargo build
-     cargo run
+     cargo build --release
+
+- To Compile For Window
+
+.. code-block:: bash
+
+       cargo build --release --target x86_64-pc-windows-gnu
+
+- On Windows
+
+.. code-block:: powershell
+
+    cargo build --release
 
 Installation
 ============
