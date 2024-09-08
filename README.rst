@@ -1,37 +1,36 @@
 Code Rush
 =========
-It will make code runner, like vscode, inside your terminal.
+     It will make code runner, like vscode, inside your terminal. And can be usefull on sublime text editor.
 
 Dependencies
 =============
 
 - Names
 
-.. code-block:: bash
-
-
-    $ pyinstaller (python module)
-    $ python3
-    $ rustup or rustc
-    $ fish
+     rustup or rustc
 
 - For Arch
 
 .. code-block:: bash
 
-   $ sudo bash dependencies_for_python.bash
-   $ sudo bash dependencies_for_rust.bash
+     sudo pacman -Sy &&
+     sudo pacman -S rustup &&
+     rustup defualt stable
 
-
-Build
-=====
-- In Python
+- For Debian Or Ubuntu
 
 .. code-block:: bash
 
-      $ pyinstaller --onefile coderush.py
+    sudo apt install rustup
 
-- In Rust
+- For Fedora
+
+.. code-block:: bash
+
+   sudo dnf install rustup
+
+Build
+=====
 
 .. code-block:: bash
 
@@ -43,16 +42,9 @@ Build
 Installation
 ============
 
-- For Python 
-
 .. code-block:: bash
 
-    $ sudo cp coderush /usr/local/bin -r
-
-- For Rust
-    
-.. code-block:: bash
-
-   $ cd target &&
-   $ cd debug &&
-   $ sudo cp coderush /usr/local/bin -r
+    cd coderush-rust &&
+    cd target &&
+    cd release &&
+    sudo cp coderush /usr/local/bin -r
