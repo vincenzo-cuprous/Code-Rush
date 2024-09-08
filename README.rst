@@ -41,3 +41,13 @@ Build
      cd coderush-rust &&
      cargo build && 
      cargo run
+
+Installation
+============
+
+- For Linux
+
+.. code-block:: bash
+
+        sudo cp coderush /usr/local/bin/ -r
+      
