@@ -78,5 +78,4 @@ Installation
 - For Windows
 
        1. First hit setup.exe
-       2. Then open path.exe inside unzipped folder
-      
+       2. Then open path.exe      
