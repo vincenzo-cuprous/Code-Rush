@@ -21,13 +21,17 @@ Dependencies
 
 .. code-block:: bash
 
-    sudo apt install rustup
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 - For Fedora
 
 .. code-block:: bash
 
-   sudo dnf install rustup
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+- For Windows
+
+     
 
 Build
 =====
