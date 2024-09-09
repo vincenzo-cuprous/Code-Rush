@@ -78,4 +78,39 @@ Installation
 - For Windows
 
        1. First hit setup.exe
-       2. Then open path.exe      
+       2. Then open path.exe
+
+- Terminus Plugin For Both Windows and Linux
+
+.. code-block:: json
+
+         [
+       // Toggle the default shell in panel
+       { "keys": ["ctrl+alt+`"], 
+        "command": "terminus_open",
+        // "command": "open_terminal_project_folder",
+          "args": {
+            "shell_cmd": "fish",
+            "cwd": "${file_path:${folder}}",
+            // "panel_name": "Terminus",
+            // "pre_window_hooks": [],
+            // "post_window_hooks": [],
+            // "default_title": "Coderush",
+            // "title": "Run Coderush",
+            // "auto_close": false
+          }
+        },
+
+
+        // Open a terminal tab at the current file directory and run coderush
+         {
+        "keys": ["ctrl+alt+space"],
+        "command": "toggle_terminus_panel",
+        "args": {
+            "shell_cmd": "fish",
+            "cwd": "${file_path:${folder}}",
+            
+                }
+         }
+        ]
+
