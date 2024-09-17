@@ -7,9 +7,9 @@ Dependencies
 
 - Names
 
-     1. rustup or rustc
-     2. mingw64-gcc
-     3. x86_64-pc-windows-gnu
+     I. rustup or rustc
+     II. mingw64-gcc
+     II. x86_64-pc-windows-gnu
 
 - On Arch
 
@@ -77,8 +77,8 @@ Installation
 
 - For Windows
 
-       1. First hit setup.exe
-       2. Then open path.exe
+       I. First hit setup.exe
+       II. Then open path.exe
 
 
 
