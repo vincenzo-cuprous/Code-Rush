@@ -7,8 +7,8 @@ Dependencies
 
 - Names
 
-     I. rustup or rustc
-     II. mingw64-gcc
+     I.   rustup or rustc
+     II.  mingw64-gcc
      III. x86_64-pc-windows-gnu
 
 - On Arch
