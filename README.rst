@@ -1,6 +1,6 @@
 Code Rush
 =========
-                    It will make code runner, like vscode, inside your terminal. And can be usefull on sublime text editor.
+                    It will make your learning and exploring abilities much faster then before.
 
 Dependencies
 =============
