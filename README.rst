@@ -7,7 +7,7 @@ Dependencies
 
 - Names
 
-     I.   rustup or rustc
+     1.   rustup or rustc
      2.  mingw64-gcc
      3. x86_64-pc-windows-gnu
 
