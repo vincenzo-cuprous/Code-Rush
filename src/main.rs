@@ -7,6 +7,8 @@ mod zig_haxe_nim; // Include the zig_haxe_nim module
 mod java_kotlin_python; // Include the java_kotlin_python module
 mod rust_go_ruby; // Include the rust_go_ruby module
 mod mojo; // Include the mojo module
+mod help; // Include the help module
+mod version; // Include the version module
 
 // Function to run Julia files
 fn run_jul(file_name: &str) {
@@ -67,6 +69,19 @@ fn get_compiler() -> String {
 fn main() {
     let args: Vec<String> = env::args().collect();
 
+    // Check if the help flag `--h` is provided
+    if args.len() == 2 && args[1] == "--h" {
+        help::display_help();
+        return;
+    }
+
+    // Check if the version flag `--version` is provided
+    if args.len() == 2 && args[1] == "--version" {
+        version::display_version();
+        return;
+    }
+
+    // Check if the `-c` flag is used for setting the C# compiler
     if args.len() == 3 && args[1] == "-c" {
         let compiler = &args[2];
         set_compiler(compiler);
@@ -74,14 +89,16 @@ fn main() {
         return;
     }
 
+    // Ensure a valid filename is provided
     if args.len() != 2 {
-        eprintln!("Usage: run_file <filename> or run_file -c <compiler>");
+        eprintln!("Usage: coderush <filename> or coderush -c <compiler>");
         std::process::exit(1);
     }
 
     let file_name = &args[1];
     let compiler = get_compiler();
 
+    // File execution logic based on the file extension
     match file_name.as_str() {
         f if f.ends_with(".c") => c_cpp_cs::run_c(f),
         f if f.ends_with(".cpp") => c_cpp_cs::run_cpp(f),

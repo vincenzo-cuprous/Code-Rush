@@ -1,0 +1,12 @@
+Commands:
+
+         coderush <filename>.(Any Language Extension) It will return output as well as input.
+
+Attributes:
+
+-c This attribute will change the compiler into the following:
+
+mono        Changes C#'s compiler to Mono.
+dotnet      Changes C#'s compiler to .NET.
+--h         This will display help.
+--version   This will displays version.
