@@ -9,11 +9,11 @@ mod rust_go_ruby;      // Include the rust_go_ruby module
 mod mojo;              // Include the mojo module
 mod help;              // Include the help module
 mod version;           // Include the version module
-mod build;             // Include the new build module
+mod build;             // Include the build module
+mod build_1;           // Add the build_1 module for MinGW C++ compilation
 
 // Optimized function to run Julia files
 fn run_jul(file_name: &str) {
-    // Check if the file has a .jl extension and exists
     match fs::metadata(file_name) {
         Ok(metadata) => {
             if file_name.ends_with(".jl") && metadata.is_file() {
@@ -100,6 +100,29 @@ fn main() {
         return;
     }
 
+    // Check if the `-w` flag is used to build a Windows executable using MinGW or publish a C# project
+    if args.len() >= 3 && args[1] == "-w" {
+        let file_name = &args[2];
+
+        // Check if the file exists
+        if fs::metadata(file_name).is_err() {
+            eprintln!("Error: File '{}' does not exist.", file_name);
+            return;
+        }
+
+        if file_name.ends_with(".c") {
+            build::build_mingw(file_name);  // Compile C files using MinGW GCC
+        } else if file_name.ends_with(".cpp") {
+            build_1::build_mingw_cpp(file_name);  // Compile C++ files using MinGW G++
+        } else if file_name.ends_with(".cs") {
+            build_1::publish_dotnet(file_name);  // Publish C# files using dotnet
+        } else {
+            eprintln!("Error: Unsupported file type with -w flag. Only .c, .cpp, and .cs files are allowed.");
+        }
+
+        return;
+    }
+
     // Handle the build command
     if args.len() == 3 && args[1] == "build" {
         let file_name = &args[2];
@@ -122,7 +145,7 @@ fn main() {
         f if f.ends_with(".cpp") => c_cpp_cs::run_cpp(f),
         f if f.ends_with(".cs") => {
             if compiler == "dotnet" {
-                c_cpp_cs::run_dot(f);
+                build_1::publish_dotnet(f);  // Updated to use the new function signature
             } else if compiler == "mono" {
                 c_cpp_cs::run_cs(f);
             } else {
