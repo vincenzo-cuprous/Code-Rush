@@ -2,30 +2,41 @@ use std::env;
 use std::fs;
 use std::process::Command;
 
-mod c_cpp_cs; // Include the c_cpp_cs module
-mod zig_haxe_nim; // Include the zig_haxe_nim module
+mod c_cpp_cs;          // Include the c_cpp_cs module
+mod zig_haxe_nim;      // Include the zig_haxe_nim module
 mod java_kotlin_python; // Include the java_kotlin_python module
-mod rust_go_ruby; // Include the rust_go_ruby module
-mod mojo; // Include the mojo module
-mod help; // Include the help module
-mod version; // Include the version module
+mod rust_go_ruby;      // Include the rust_go_ruby module
+mod mojo;              // Include the mojo module
+mod help;              // Include the help module
+mod version;           // Include the version module
+mod build;             // Include the new build module
 
-// Function to run Julia files
+// Optimized function to run Julia files
 fn run_jul(file_name: &str) {
-    if !file_name.ends_with(".jl") || !fs::metadata(file_name).is_ok() {
-        println!("Error: File does not exist or is not a .jl file.");
-        return;
+    // Check if the file has a .jl extension and exists
+    match fs::metadata(file_name) {
+        Ok(metadata) => {
+            if file_name.ends_with(".jl") && metadata.is_file() {
+                let status = Command::new("julia")
+                    .arg(file_name)
+                    .status()
+                    .expect("Failed to run .jl file.");
+                
+                if !status.success() {
+                    eprintln!("Error: Julia execution failed.");
+                }
+            } else {
+                eprintln!("Error: File is not a .jl file.");
+            }
+        }
+        Err(_) => eprintln!("Error: File does not exist."),
     }
-    Command::new("julia")
-        .arg(file_name)
-        .status()
-        .expect("Failed to run .jl file.");
 }
 
 // Function to run Zig files
 fn run_zig(file_name: &str) {
     if !file_name.ends_with(".zig") || !fs::metadata(file_name).is_ok() {
-        println!("Error: File does not exist or is not a .zig file.");
+        eprintln!("Error: File does not exist or is not a .zig file.");
         return;
     }
     zig_haxe_nim::run_zig(file_name);
@@ -34,7 +45,7 @@ fn run_zig(file_name: &str) {
 // Function to run Haxe files
 fn run_haxe(file_name: &str) {
     if !file_name.ends_with(".hx") || !fs::metadata(file_name).is_ok() {
-        println!("Error: File does not exist or is not a .hx file.");
+        eprintln!("Error: File does not exist or is not a .hx file.");
         return;
     }
     zig_haxe_nim::run_haxe(file_name);
@@ -43,7 +54,7 @@ fn run_haxe(file_name: &str) {
 // Function to run Nim files
 fn run_nim(file_name: &str) {
     if !file_name.ends_with(".nim") || !fs::metadata(file_name).is_ok() {
-        println!("Error: File does not exist or is not a .nim file.");
+        eprintln!("Error: File does not exist or is not a .nim file.");
         return;
     }
     zig_haxe_nim::run_nim(file_name);
@@ -89,9 +100,16 @@ fn main() {
         return;
     }
 
+    // Handle the build command
+    if args.len() == 3 && args[1] == "build" {
+        let file_name = &args[2];
+        build::build_file(file_name);
+        return;
+    }
+
     // Ensure a valid filename is provided
     if args.len() != 2 {
-        eprintln!("Usage: coderush <filename> or coderush -c <compiler>");
+        eprintln!("Usage: coderush <filename> or coderush build <filename> or coderush -c <compiler>");
         std::process::exit(1);
     }
 
@@ -121,6 +139,7 @@ fn main() {
         f if f.ends_with(".rs") => rust_go_ruby::run_rust(f),
         f if f.ends_with(".go") => rust_go_ruby::run_golang(f),
         f if f.ends_with(".rb") => rust_go_ruby::run_rb(f),
+        f if f.ends_with(".jl") => run_jul(f),  // Added Julia handling here
         _ => eprintln!("Unsupported file type."),
     }
 }
