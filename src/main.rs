@@ -12,52 +12,39 @@ mod version;           // Include the version module
 mod build;             // Include the build module
 mod build_1;           // Add the build_1 module for MinGW C++ compilation
 
+// Function to check file validity based on extension
+fn is_valid_file(file_name: &str, ext: &str) -> bool {
+    file_name.ends_with(ext) && fs::metadata(file_name).is_ok()
+}
+
 // Optimized function to run Julia files
 fn run_jul(file_name: &str) {
-    match fs::metadata(file_name) {
-        Ok(metadata) => {
-            if file_name.ends_with(".jl") && metadata.is_file() {
-                let status = Command::new("julia")
-                    .arg(file_name)
-                    .status()
-                    .expect("Failed to run .jl file.");
-                
-                if !status.success() {
-                    eprintln!("Error: Julia execution failed.");
-                }
-            } else {
-                eprintln!("Error: File is not a .jl file.");
-            }
+    if is_valid_file(file_name, ".jl") {
+        let status = Command::new("julia")
+            .arg(file_name)
+            .status()
+            .expect("Failed to run .jl file.");
+        if !status.success() {
+            eprintln!("Error: Julia execution failed.");
         }
-        Err(_) => eprintln!("Error: File does not exist."),
+    } else {
+        eprintln!("Error: File is not a .jl file or does not exist.");
     }
 }
 
-// Function to run Zig files
-fn run_zig(file_name: &str) {
-    if !file_name.ends_with(".zig") || !fs::metadata(file_name).is_ok() {
-        eprintln!("Error: File does not exist or is not a .zig file.");
+// Functions to run Zig, Haxe, and Nim files
+fn run_zhn(file_name: &str, lang: &str) {
+    if !is_valid_file(file_name, lang) {
+        eprintln!("Error: File does not exist or is not a {} file.", lang);
         return;
     }
-    zig_haxe_nim::run_zig(file_name);
-}
 
-// Function to run Haxe files
-fn run_haxe(file_name: &str) {
-    if !file_name.ends_with(".hx") || !fs::metadata(file_name).is_ok() {
-        eprintln!("Error: File does not exist or is not a .hx file.");
-        return;
+    match lang {
+        ".zig" => zig_haxe_nim::run_zig(file_name),
+        ".hx" => zig_haxe_nim::run_haxe(file_name),
+        ".nim" => zig_haxe_nim::run_nim(file_name),
+        _ => unreachable!(),
     }
-    zig_haxe_nim::run_haxe(file_name);
-}
-
-// Function to run Nim files
-fn run_nim(file_name: &str) {
-    if !file_name.ends_with(".nim") || !fs::metadata(file_name).is_ok() {
-        eprintln!("Error: File does not exist or is not a .nim file.");
-        return;
-    }
-    zig_haxe_nim::run_nim(file_name);
 }
 
 // Function to set the compiler configuration for C#
@@ -70,26 +57,28 @@ fn set_compiler(compiler: &str) {
 // Function to get the current compiler configuration for C#
 fn get_compiler() -> String {
     let config_path = dirs::config_dir().unwrap().join("coderush/compiler_config.txt");
-    if fs::metadata(&config_path).is_ok() {
-        fs::read_to_string(config_path).unwrap_or_else(|_| "default".to_string())
-    } else {
-        "default".to_string()
-    }
+    fs::read_to_string(&config_path).unwrap_or_else(|_| "default".to_string())
 }
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    // Check if the help flag `--h` is provided
-    if args.len() == 2 && args[1] == "--h" {
-        help::display_help();
-        return;
-    }
-
-    // Check if the version flag `--version` is provided
-    if args.len() == 2 && args[1] == "--version" {
-        version::display_version();
-        return;
+    // Check for help or version flags
+    if args.len() == 2 {
+        match args[1].as_str() {
+            "--h" => {
+                help::display_help();
+                return;
+            }
+            "--version" => {
+                version::display_version();
+                return;
+            }
+            _ => { // Wildcard case to handle invalid arguments
+                eprintln!("Invalid argument: {}", args[1]);
+                std::process::exit(1);
+            }
+        }
     }
 
     // Check if the `-c` flag is used for setting the C# compiler
@@ -100,11 +89,9 @@ fn main() {
         return;
     }
 
-    // Check if the `-w` flag is used to build a Windows executable using MinGW or publish a C# project
+    // Check if the `-w` flag is used to build a Windows executable using MinGW
     if args.len() >= 3 && args[1] == "-w" {
         let file_name = &args[2];
-
-        // Check if the file exists
         if fs::metadata(file_name).is_err() {
             eprintln!("Error: File '{}' does not exist.", file_name);
             return;
@@ -114,12 +101,9 @@ fn main() {
             build::build_mingw(file_name);  // Compile C files using MinGW GCC
         } else if file_name.ends_with(".cpp") {
             build_1::build_mingw_cpp(file_name);  // Compile C++ files using MinGW G++
-        } else if file_name.ends_with(".cs") {
-            build_1::publish_dotnet(file_name);  // Publish C# files using dotnet
         } else {
-            eprintln!("Error: Unsupported file type with -w flag. Only .c, .cpp, and .cs files are allowed.");
+            eprintln!("Error: Unsupported file type with -w flag. Only .c and .cpp files are allowed.");
         }
-
         return;
     }
 
@@ -143,26 +127,18 @@ fn main() {
     match file_name.as_str() {
         f if f.ends_with(".c") => c_cpp_cs::run_c(f),
         f if f.ends_with(".cpp") => c_cpp_cs::run_cpp(f),
-        f if f.ends_with(".cs") => {
-            if compiler == "dotnet" {
-                build_1::publish_dotnet(f);  // Updated to use the new function signature
-            } else if compiler == "mono" {
-                c_cpp_cs::run_cs(f);
-            } else {
-                eprintln!("Error: Unsupported C# compiler configuration.");
-            }
-        },
         f if f.ends_with(".java") => java_kotlin_python::run_java(f),
         f if f.ends_with(".kt") => java_kotlin_python::run_kotlin(f),
         f if f.ends_with(".py") => java_kotlin_python::run_py(f),
-        f if f.ends_with(".zig") => run_zig(f),
-        f if f.ends_with(".hx") => run_haxe(f),
-        f if f.ends_with(".nim") => run_nim(f),
+        f if f.ends_with(".zig") => run_zhn(f, ".zig"),
+        f if f.ends_with(".hx") => run_zhn(f, ".hx"),
+        f if f.ends_with(".nim") => run_zhn(f, ".nim"),
         f if f.ends_with(".mojo") => mojo::run_mojo(f),
         f if f.ends_with(".rs") => rust_go_ruby::run_rust(f),
         f if f.ends_with(".go") => rust_go_ruby::run_golang(f),
         f if f.ends_with(".rb") => rust_go_ruby::run_rb(f),
         f if f.ends_with(".jl") => run_jul(f),  // Added Julia handling here
-        _ => eprintln!("Unsupported file type."),
+        f if f.ends_with(".cs") => c_cpp_cs::run_cs(f), // Added C# handling here
+        _ => eprintln!("Unsupported file type."), // Wildcard case to handle unsupported types
     }
 }
