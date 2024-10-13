@@ -9,8 +9,6 @@ mod rust_go_ruby;      // Include the rust_go_ruby module
 mod mojo;              // Include the mojo module
 mod help;              // Include the help module
 mod version;           // Include the version module
-mod build;             // Include the build module
-mod build_1;           // Add the build_1 module for MinGW C++ compilation
 
 // Function to check file validity based on extension
 fn is_valid_file(file_name: &str, ext: &str) -> bool {
